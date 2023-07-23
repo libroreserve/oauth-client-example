@@ -125,7 +125,7 @@ class DoorkeeperClient < Sinatra::Base
 
     client.auth_code.authorize_url(
       redirect_uri: app.confidential_client_redirect_uri,
-      scope: 'read',
+      scope: 'restaurants bookings people',
       state: generate_state!,
       code_challenge_method: code_challenge_method,
       code_challenge: code_challenge
@@ -187,11 +187,16 @@ class DoorkeeperClient < Sinatra::Base
     erb :error, layout: !request.xhr?
   end
 
-  get '/explore/:api' do
-    raise 'Please call a valid endpoint' unless params[:api]
+  get '/explore/*' do
+    path = params['splat'].join
+    raise 'Please call a valid endpoint' unless path
 
     begin
-      response = access_token.get("/api/v1/#{params[:api]}")
+      response = access_token.get "/api/restricted/#{path}", headers: {
+        'Content-Type' => 'application/json',
+        'Accept' => 'application/vnd.libro-restricted-v2+json'
+      }
+
       @json = JSON.parse(response.body)
       erb :explore, layout: !request.xhr?
     rescue OAuth2::Error => _e

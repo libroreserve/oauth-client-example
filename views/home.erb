@@ -7,9 +7,9 @@
     <a href="/sign_in" class="btn btn-success" role="button">
       Sign in on <%= site_host %>
     </a>
-    <a href="/public_sign_in" class="btn btn-success" role="button">
+    <!--a href="/public_sign_in" class="btn btn-success" role="button">
       Sign in with the public client on <%= site_host %>
-    </a>
+    </a-->
     <% end %>
   </p>
 <% else %>
@@ -19,8 +19,9 @@
   <p>Click on the buttons below to explore <code><%= site_host %></code> API</p>
 
   <p>
-    <a class="btn btn-outline-primary" href="/explore/me.json" data-explore>My Credentials</a>
-    <a class="btn btn-outline-primary" href="/explore/projects.json" data-explore>Projects</a>
+    <a class="btn btn-outline-primary" href="/explore/restaurants" data-explore>Restaurants</a>
+    <a class="btn btn-outline-primary" href="/explore/restaurant/bookings" data-explore>Bookings</a>
+    <!--a class="btn btn-outline-primary" href="/explore/people" data-explore>People</a-->
     <a class="btn btn-outline-secondary" href="/sign_out" class="btn primary">Sign out</a>
   </p>
 
