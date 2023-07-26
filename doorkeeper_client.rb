@@ -5,7 +5,7 @@ require 'securerandom'
 require 'singleton'
 require 'dotenv/load'
 require './lib/html_renderer'
-
+OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
 Rollbar.configure do |config|
   config.access_token = ENV['ROLLBAR_ACCESS_TOKEN']
 end
