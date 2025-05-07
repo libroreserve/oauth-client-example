@@ -123,9 +123,10 @@ class DoorkeeperClient < Sinatra::Base
   def authorize_url_for_client(type)
     session[:client] = type
 
+    scope = ENV['AUTHORIZED_SCOPES'] || 'bookings restaurants people'
     client.auth_code.authorize_url(
       redirect_uri: app.confidential_client_redirect_uri,
-      scope: 'restaurants bookings people',
+      scope: scope,
       state: generate_state!,
       code_challenge_method: code_challenge_method,
       code_challenge: code_challenge
