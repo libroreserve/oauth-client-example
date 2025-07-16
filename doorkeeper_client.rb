@@ -24,10 +24,10 @@ end
 App.instance.tap do |app|
   app.public_client_id = ENV['PUBLIC_CLIENT_ID']
   app.public_client_redirect_uri = ENV['PUBLIC_CLIENT_REDIRECT_URI']
-  app.confidential_client_id = ENV['CONFIDENTIAL_CLIENT_ID']
-  app.confidential_client_secret = ENV['CONFIDENTIAL_CLIENT_SECRET']
+  app.confidential_client_id = ENV['ENV'] == 'local' ? ENV['CONFIDENTIAL_CLIENT_ID'] : ENV['STAGING_CONFIDENTIAL_CLIENT_ID']
+  app.confidential_client_secret = ENV['ENV'] == 'local' ? ENV['CONFIDENTIAL_CLIENT_SECRET'] : ENV['STAGING_CONFIDENTIAL_CLIENT_SECRET']
+  app.provider_url = ENV['ENV'] == 'local' ? ENV['PROVIDER_URL'] : ENV['STAGING_PROVIDER_URL']
   app.confidential_client_redirect_uri = ENV['CONFIDENTIAL_CLIENT_REDIRECT_URI']
-  app.provider_url = ENV['PROVIDER_URL']
 end
 
 class DoorkeeperClient < Sinatra::Base
